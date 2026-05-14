@@ -23,12 +23,15 @@
 
     function updateAuthLinks() {
         if (userSession && userSession.loggedIn) {
-            $('.login-link, .signup-link').addClass('d-none');
-            $('.logout-link, .nav-user').removeClass('d-none');
-            $('.nav-user').text(`Hi, ${userSession.name || userSession.email}`);
+            $('.auth-links').addClass('d-none');
+            $('.user-dropdown').removeClass('d-none');
+            $('.nav-user').text(userSession.name || userSession.email);
+            $('.user-detail-name').text(userSession.name || 'N/A');
+            $('.user-detail-email').text(userSession.email || 'N/A');
+            $('.user-detail-phone').text(userSession.phone || 'N/A');
         } else {
-            $('.login-link, .signup-link').removeClass('d-none');
-            $('.logout-link, .nav-user').addClass('d-none');
+            $('.auth-links').removeClass('d-none');
+            $('.user-dropdown').addClass('d-none');
         }
     }
 
@@ -152,13 +155,15 @@
         });
     });
 
-    $('.logout-link').click(function(event) {
+    $('body').on('click', '.logout-link', function(event) {
         event.preventDefault();
         userSession = { loggedIn: false };
         saveSession();
         updateAuthLinks();
         showToast('You have been logged out.', 'info');
-        renderCart();
+        if (window.location.pathname.includes('cart.html')) {
+            renderCart();
+        }
     });
 
     if ($('#contactForm').length) {
@@ -187,11 +192,17 @@
                 return;
             }
 
-            userSession = { loggedIn: true, email: userAccount.email, name: userAccount.name };
+            userSession = { 
+                loggedIn: true, 
+                email: userAccount.email, 
+                name: userAccount.name,
+                phone: userAccount.phone,
+                address: userAccount.address
+            };
             saveSession();
             updateAuthLinks();
             showToast('Login successful!', 'success');
-            window.location.href = 'cart.html';
+            window.location.href = 'index.html';
         });
     }
 
@@ -201,21 +212,23 @@
             const name = $('#signupName').val().trim();
             const email = $('#signupEmail').val().trim();
             const password = $('#signupPassword').val();
+            const phone = $('#signupPhone').val().trim();
+            const address = $('#signupAddress').val().trim();
             const errorField = $('#signupError');
             errorField.text('');
 
-            if (!name || !email || !password) {
+            if (!name || !email || !password || !phone || !address) {
                 errorField.text('Please complete every field.');
                 return;
             }
 
-            userAccount = { name, email, password };
+            userAccount = { name, email, password, phone, address };
             saveAccount();
-            userSession = { loggedIn: true, email, name };
+            userSession = { loggedIn: true, email, name, phone, address };
             saveSession();
             updateAuthLinks();
             showToast('Account created successfully!', 'success');
-            window.location.href = 'cart.html';
+            window.location.href = 'index.html';
         });
     }
 
