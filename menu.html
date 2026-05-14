@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - BURGER HAVEN</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">BURGER HAVEN</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="menu.html">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="specials.html">Specials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count"></span></a></li>
+                    <li class="nav-item auth-links">
+                        <a class="nav-link login-link" href="login.html">Login</a>
+                        <a class="nav-link signup-link" href="signup.html">Sign Up</a>
+                        <a class="nav-link logout-link d-none" href="#">Logout</a>
+                        <span class="nav-link nav-user d-none"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="single-page">
+        <section class="page-heading text-center">
+            <div class="container">
+                <h1>Our Menu</h1>
+                <p>Choose your favorite meals, set the quantity, and add them to your cart.</p>
+            </div>
+        </section>
+
+        <section class="featured-menu py-4 bg-light">
+            <div class="container">
+                <div class="row gy-3 align-items-center">
+                    <div class="col-md-4">
+                        <div class="feature-card text-center p-3">
+                            <img src="images/menuItem-1.jpeg" alt="Classic Burger" class="img-fluid rounded mb-3">
+                            <h4>Classic Burger</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card text-center p-3">
+                            <img src="images/menuItem-2.jpeg" alt="Spicy Chicken" class="img-fluid rounded mb-3">
+                            <h4>Spicy Chicken</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card text-center p-3">
+                            <img src="images/menuItem-3.jpeg" alt="Veggie Delight" class="img-fluid rounded mb-3">
+                            <h4>Veggie Delight</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-section py-5">
+            <div class="container">
+                <h2 class="section-title text-center mb-5">Our Signature Menu</h2>
+                <div class="row gx-4 gy-5">
+                    <!-- Menu Item 1 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="menu-item">
+                            <div class="menu-img-wrapper">
+                                <img src="images/menuItem-1.jpeg" alt="Classic beef burger" class="menu-img">
+                                <span class="menu-price">$8.99</span>
+                                <div class="menu-overlay">
+                                    <input type="number" min="1" value="1" class="qty-input" aria-label="Quantity">
+                                    <button class="btn btn-add-cart menu-btn" data-name="Classic Burger" data-price="8.99">Add to Cart</button>
+                                </div>
+                            </div>
+                            <div class="menu-content">
+                                <h4 class="menu-title">Classic Burger</h4>
+                                <p class="menu-desc">Juicy beef patty with aged cheddar, crisp lettuce, and our signature sauce.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 2 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="menu-item">
+                            <div class="menu-img-wrapper">
+                                <img src="images/menuItem-2.jpeg" alt="Spicy chicken sandwich" class="menu-img">
+                                <span class="menu-price">$9.50</span>
+                                <div class="menu-overlay">
+                                    <input type="number" min="1" value="1" class="qty-input" aria-label="Quantity">
+                                    <button class="btn btn-add-cart menu-btn" data-name="Spicy Chicken" data-price="9.50">Add to Cart</button>
+                                </div>
+                            </div>
+                            <div class="menu-content">
+                                <h4 class="menu-title">Spicy Chicken</h4>
+                                <p class="menu-desc">Crispy buttermilk chicken with spicy chipotle mayo and house pickles.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 3 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="menu-item">
+                            <div class="menu-img-wrapper">
+                                <img src="images/menuItem-3.jpeg" alt="Veggie burger" class="menu-img">
+                                <span class="menu-price">$9.25</span>
+                                <div class="menu-overlay">
+                                    <input type="number" min="1" value="1" class="qty-input" aria-label="Quantity">
+                                    <button class="btn btn-add-cart menu-btn" data-name="Veggie Delight" data-price="9.25">Add to Cart</button>
+                                </div>
+                            </div>
+                            <div class="menu-content">
+                                <h4 class="menu-title">Veggie Delight</h4>
+                                <p class="menu-desc">Portobello mushroom with roasted red peppers, goat cheese, and basil pesto.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 4 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="menu-item">
+                            <div class="menu-img-wrapper">
+                                <img src="images/menuItem-4.jpeg" alt="Bacon double burger" class="menu-img">
+                                <span class="menu-price">$11.99</span>
+                                <div class="menu-overlay">
+                                    <input type="number" min="1" value="1" class="qty-input" aria-label="Quantity">
+                                    <button class="btn btn-add-cart menu-btn" data-name="Bacon Double" data-price="11.99">Add to Cart</button>
+                                </div>
+                            </div>
+                            <div class="menu-content">
+                                <h4 class="menu-title">Bacon Double</h4>
+                                <p class="menu-desc">Two beef patties with crispy bacon, American cheese, and onion rings.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 5 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="menu-item">
+                            <div class="menu-img-wrapper">
+                                <img src="images/menuItem-5.jpeg" alt="Pulled pork sandwich" class="menu-img">
+                                <span class="menu-price">$10.75</span>
+                                <div class="menu-overlay">
+                                    <input type="number" min="1" value="1" class="qty-input" aria-label="Quantity">
+                                    <button class="btn btn-add-cart menu-btn" data-name="Pulled Pork" data-price="10.75">Add to Cart</button>
+                                </div>
+                            </div>
+                            <div class="menu-content">
+                                <h4 class="menu-title">Pulled Pork</h4>
+                                <p class="menu-desc">Slow-cooked pork with our homemade BBQ sauce and tangy coleslaw.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 6 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="menu-item">
+                            <div class="menu-img-wrapper">
+                                <img src="images/menuItem-6.jpeg" alt="Loaded fries" class="menu-img">
+                                <span class="menu-price">$4.50</span>
+                                <div class="menu-overlay">
+                                    <input type="number" min="1" value="1" class="qty-input" aria-label="Quantity">
+                                    <button class="btn btn-add-cart menu-btn" data-name="Loaded Fries" data-price="4.50">Add to Cart</button>
+                                </div>
+                            </div>
+                            <div class="menu-content">
+                                <h4 class="menu-title">Loaded Fries</h4>
+                                <p class="menu-desc">Crispy fries topped with cheese sauce, bacon bits, and green onions.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 7 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="menu-item">
+                            <div class="menu-img-wrapper">
+                                <img src="images/gallery-item-4.jpeg" alt="Strawberry milkshake" class="menu-img">
+                                <span class="menu-price">$5.50</span>
+                                <div class="menu-overlay">
+                                    <input type="number" min="1" value="1" class="qty-input" aria-label="Quantity">
+                                    <button class="btn btn-add-cart menu-btn" data-name="Strawberry Shake" data-price="5.50">Add to Cart</button>
+                                </div>
+                            </div>
+                            <div class="menu-content">
+                                <h4 class="menu-title">Strawberry Shake</h4>
+                                <p class="menu-desc">Creamy strawberry milkshake topped with whipped cream and fresh berries.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Item 8 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="menu-item">
+                            <div class="menu-img-wrapper">
+                                <img src="images/gallery-item-5.jpeg" alt="Loaded nachos" class="menu-img">
+                                <span class="menu-price">$7.25</span>
+                                <div class="menu-overlay">
+                                    <input type="number" min="1" value="1" class="qty-input" aria-label="Quantity">
+                                    <button class="btn btn-add-cart menu-btn" data-name="Loaded Nachos" data-price="7.25">Add to Cart</button>
+                                </div>
+                            </div>
+                            <div class="menu-content">
+                                <h4 class="menu-title">Loaded Nachos</h4>
+                                <p class="menu-desc">Crispy nachos topped with cheese, jalapeños, and seasoned beef.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="more-section py-5 bg-light">
+            <div class="container">
+                <h2 class="section-title text-center mb-5">More from Burger Haven</h2>
+                <div class="row g-4">
+                    <!-- Explore Card 1 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="explore-card">
+                            <div class="explore-img-wrapper">
+                                <img src="images/ourstory.jpeg" alt="Our Story" class="explore-img">
+                                <div class="explore-overlay"></div>
+                            </div>
+                            <div class="explore-content">
+                                <h3>About Us</h3>
+                                <p>Learn about our story and what makes Burger Haven special.</p>
+                                <a class="btn btn-explore" href="about.html">
+                                    Read More <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Explore Card 2 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="explore-card">
+                            <div class="explore-img-wrapper">
+                                <img src="images/gallery-item-4.jpeg" alt="Gallery" class="explore-img">
+                                <div class="explore-overlay"></div>
+                            </div>
+                            <div class="explore-content">
+                                <h3>Gallery</h3>
+                                <p>See delicious photos of our food and restaurant favorites.</p>
+                                <a class="btn btn-explore" href="gallery.html">
+                                    View Gallery <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Explore Card 3 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="explore-card">
+                            <div class="explore-img-wrapper">
+                                <img src="images/menuItem-2.jpeg" alt="Specials" class="explore-img">
+                                <div class="explore-overlay"></div>
+                            </div>
+                            <div class="explore-content">
+                                <h3>Specials</h3>
+                                <p>Discover limited offers and value combos right now.</p>
+                                <a class="btn btn-explore" href="specials.html">
+                                    View Specials <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="page-footer py-4 bg-dark text-white text-center">
+        <div class="container">
+            <p>&copy; 2026 Burger Haven. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
