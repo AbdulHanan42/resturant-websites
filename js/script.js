@@ -1,208 +1,277 @@
  $(document).ready(function() {
-            // Smooth scrolling for navigation links
-            $('a[href^="#"]').on('click', function(e) {
-                e.preventDefault();
-                const target = $(this).attr('href');
-                if(target === '#') return;
-                
-                $('html, body').animate({
-                    scrollTop: $(target).offset().top - 70
-                }, 800);
-            });
-            
-            // Navbar scroll effect
-            $(window).scroll(function() {
-                if($(this).scrollTop() > 50) {
-                    $('.navbar').addClass('shadow-sm');
-                    $('.navbar').css('padding', '10px 0');
-                } else {
-                    $('.navbar').removeClass('shadow-sm');
-                    $('.navbar').css('padding', '20px 0');
-                }
-                
-                // Back to top button
-                if($(this).scrollTop() > 300) {
-                    $('.back-to-top').addClass('active');
-                } else {
-                    $('.back-to-top').removeClass('active');
-                }
-            });
-            
-            // Back to top button
-            $('.back-to-top').click(function() {
-                $('html, body').animate({scrollTop: 0}, 'slow');
-                return false;
-            });
-            
-            // Animate menu items on scroll
-            function animateMenuItems() {
-                const windowTop = $(window).scrollTop();
-                const windowHeight = $(window).height();
-                
-                $('.menu-item').each(function() {
-                    const itemTop = $(this).offset().top;
-                    
-                    if(itemTop < (windowTop + windowHeight - 100)) {
-                        $(this).addClass('animated');
-                    }
-                });
-            }
-            
-            $(window).scroll(animateMenuItems);
-            animateMenuItems(); // Run once on page load
-            
-            // Testimonial carousel
-            let currentTestimonial = 0;
-            const testimonials = $('.testimonial-item');
-            
-            function showTestimonial(index) {
-                testimonials.removeClass('active');
-                $(testimonials[index]).addClass('active');
-            }
-            
-            function nextTestimonial() {
-                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-                showTestimonial(currentTestimonial);
-            }
-            
-            setInterval(nextTestimonial, 5000);
-            showTestimonial(0); // Show first testimonial
-            
-            // Order button click
-            $('.btn-order, .menu-btn').click(function() {
-                $('.order-modal').addClass('active');
-            });
-            
-            // Close modal
-            $('.close-modal').click(function() {
-                $('.order-modal').removeClass('active');
-            });
-            
-            // Close modal when clicking outside
-            $(window).click(function(e) {
-                if($(e.target).hasClass('order-modal')) {
-                    $('.order-modal').removeClass('active');
-                }
-            });
-            
-            // Form submission
-            $('#orderForm').submit(function(e) {
-                e.preventDefault();
-                alert('Thank you for your order! We will contact you shortly to confirm.');
-                $('.order-modal').removeClass('active');
-                $(this).trigger('reset');
-            });
-            
-            // 3D Floating Burger Animation
-            function updateFloatingBurgers() {
-                const scrollPosition = $(window).scrollTop();
-                const windowHeight = $(window).height();
-                
-                $('.floating-burger').each(function(index) {
-                    const speed = 0.05 + (index * 0.01);
-                    const newTop = scrollPosition * speed;
-                    
-                    // Make sure burgers don't go too high
-                    if(newTop < windowHeight * 1.5) {
-                        $(this).css('transform', `translateY(-${newTop}px) rotateY(${newTop/20}deg)`);
-                    }
-                });
-            }
-            
-            $(window).scroll(updateFloatingBurgers);
-        });
-        
-        // Text Animation Effects
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hero text typing animation
-            const heroSubtitle = document.querySelector('.hero-subtitle');
-            const text = "Fresh ingredients, bold flavors, unforgettable experiences";
-            let i = 0;
-            
-            function typeWriter() {
-                if(i < text.length) {
-                    heroSubtitle.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 50);
-                }
-            }
-            
-            setTimeout(typeWriter, 1500);
-            
-            // Hover effects for menu items
-            const menuItems = document.querySelectorAll('.menu-item');
-            menuItems.forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.03)';
-                    this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.2)';
-                    
-                    // Add color flash animation
-                    const content = this.querySelector('.menu-content');
-                    content.style.animation = 'colorFlash 0.5s ease';
-                    setTimeout(() => {
-                        content.style.animation = '';
-                    }, 500);
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                    this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
-                });
-            });
-            
-            // Add a global animation for color flash
-            const style = document.createElement('style');
-            style.innerHTML = `
-                @keyframes colorFlash {
-                    0% { background-color: white; }
-                    50% { background-color: #FFF9F2; }
-                    100% { background-color: white; }
-                }
+    const storedCart = localStorage.getItem('burgerCart');
+    const storedAccount = localStorage.getItem('burgerUserAccount');
+    const storedSession = localStorage.getItem('burgerUserSession');
+
+    let burgerCart = storedCart ? JSON.parse(storedCart) : [];
+    let userAccount = storedAccount ? JSON.parse(storedAccount) : null;
+    let userSession = storedSession ? JSON.parse(storedSession) : { loggedIn: false };
+
+    function saveCart() {
+        localStorage.setItem('burgerCart', JSON.stringify(burgerCart));
+    }
+
+    function saveAccount() {
+        if (userAccount) {
+            localStorage.setItem('burgerUserAccount', JSON.stringify(userAccount));
+        }
+    }
+
+    function saveSession() {
+        localStorage.setItem('burgerUserSession', JSON.stringify(userSession));
+    }
+
+    function updateAuthLinks() {
+        if (userSession && userSession.loggedIn) {
+            $('.login-link, .signup-link').addClass('d-none');
+            $('.logout-link, .nav-user').removeClass('d-none');
+            $('.nav-user').text(`Hi, ${userSession.name || userSession.email}`);
+        } else {
+            $('.login-link, .signup-link').removeClass('d-none');
+            $('.logout-link, .nav-user').addClass('d-none');
+        }
+    }
+
+    function updateCartCount() {
+        const total = burgerCart.reduce((sum, item) => sum + item.quantity, 0);
+        $('.cart-count').text(total ? `(${total})` : '');
+    }
+
+    function showToast(message, type = 'success') {
+        const toast = $(`<div class="toast-message ${type}">${message}</div>`);
+        $('body').append(toast);
+        setTimeout(() => toast.addClass('visible'), 10);
+        setTimeout(() => {
+            toast.removeClass('visible');
+            setTimeout(() => toast.remove(), 300);
+        }, 2600);
+    }
+
+    function showCartMessage(message, type = 'success') {
+        $('#cartMessage').html(`<div class="alert alert-${type} alert-dismissible fade show" role="alert">${message}</div>`);
+        setTimeout(() => $('#cartMessage').fadeOut(300, function() { $(this).html('').show(); }), 3000);
+    }
+
+    function addToCart(item) {
+        const existingItem = burgerCart.find(cartItem => cartItem.name === item.name);
+        if (existingItem) {
+            existingItem.quantity += item.quantity;
+        } else {
+            burgerCart.push(item);
+        }
+        saveCart();
+        updateCartCount();
+        showToast(`${item.quantity} x ${item.name} added to cart.`);
+    }
+
+    function renderCart() {
+        const cartContainer = $('#cartContainer');
+        if (!cartContainer.length) {
+            return;
+        }
+
+        if (!burgerCart.length) {
+            cartContainer.html(`
+                <div class="cart-empty text-center py-5">
+                    <h3>Your cart is empty</h3>
+                    <p>Visit the <a href="menu.html">menu</a> to add tasty items.</p>
+                </div>
+            `);
+            return;
+        }
+
+        let rows = '';
+        burgerCart.forEach((item, index) => {
+            rows += `
+                <tr>
+                    <td>
+                        <strong>${item.name}</strong>
+                        <p class="text-muted small mb-0">${item.description || ''}</p>
+                    </td>
+                    <td>$${item.price.toFixed(2)}</td>
+                    <td>
+                        <input type="number" min="1" class="form-control cart-qty" data-index="${index}" value="${item.quantity}">
+                    </td>
+                    <td>$${(item.quantity * item.price).toFixed(2)}</td>
+                    <td><button type="button" class="btn btn-link text-danger remove-item" data-index="${index}">Remove</button></td>
+                </tr>
             `;
-            document.head.appendChild(style);
-            
-            // Special items pulse animation
-            const specialItems = document.querySelectorAll('.special-item');
-            specialItems.forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    const icon = this.querySelector('.special-icon');
-                    icon.style.animation = 'pulse 0.5s ease';
-                    setTimeout(() => {
-                        icon.style.animation = '';
-                    }, 500);
-                });
-            });
-            
-            // Add pulse animation
-            const pulseStyle = document.createElement('style');
-            pulseStyle.innerHTML = `
-                @keyframes pulse {
-                    0% { transform: scale(1); }
-                    50% { transform: scale(1.2); }
-                    100% { transform: scale(1); }
-                }
-            `;
-            document.head.appendChild(pulseStyle);
-            
-            // Gallery hover effects
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            galleryItems.forEach(item => {
-                const img = item.querySelector('img');
-                const caption = item.querySelector('.gallery-caption');
-                
-                item.addEventListener('mouseenter', function() {
-                    img.style.transform = 'scale(1.1)';
-                    caption.style.transform = 'translateY(0)';
-                    
-                    // Add border animation
-                    item.style.boxShadow = '0 0 0 3px var(--primary-color)';
-                    item.style.transition = 'box-shadow 0.3s ease';
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    img.style.transform = 'scale(1)';
-                    caption.style.transform = 'translateY(100%)';
-                    item.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-                });
-            });
         });
+
+        const total = burgerCart.reduce((sum, item) => sum + item.quantity * item.price, 0);
+        cartContainer.html(`
+            <div class="cart-table-wrapper table-responsive">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            </div>
+            <div class="cart-summary p-4 bg-white rounded shadow-sm mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>Total</h5>
+                    <strong>$${total.toFixed(2)}</strong>
+                </div>
+                <div class="d-flex flex-column flex-sm-row gap-2">
+                    <button type="button" id="checkoutButton" class="btn btn-primary">Checkout</button>
+                    <a class="btn btn-outline-secondary" href="menu.html">Continue Shopping</a>
+                </div>
+                ${!userSession.loggedIn ? '<p class="mt-3 text-danger">You must <a href="login.html">log in</a> before placing an order.</p>' : ''}
+            </div>
+        `);
+    }
+
+    updateAuthLinks();
+    updateCartCount();
+    renderCart();
+
+    $('.btn-order').click(function() {
+        window.location.href = 'menu.html';
+    });
+
+    $('.menu-btn').click(function() {
+        const overlay = $(this).closest('.menu-overlay');
+        const parent = $(this).closest('.menu-item');
+        let quantity = parseInt(overlay.find('.qty-input').val(), 10) || 1;
+        if (quantity < 1) {
+            quantity = 1;
+        }
+
+        addToCart({
+            name: $(this).data('name'),
+            price: parseFloat($(this).data('price')),
+            quantity,
+            description: parent.find('.menu-desc').text().trim(),
+        });
+    });
+
+    $('.logout-link').click(function(event) {
+        event.preventDefault();
+        userSession = { loggedIn: false };
+        saveSession();
+        updateAuthLinks();
+        showToast('You have been logged out.', 'info');
+        renderCart();
+    });
+
+    if ($('#contactForm').length) {
+        $('#contactForm').submit(function(event) {
+            event.preventDefault();
+            showToast('Thank you! Your message has been sent.', 'success');
+            $(this).trigger('reset');
+        });
+    }
+
+    if ($('#loginForm').length) {
+        $('#loginForm').submit(function(event) {
+            event.preventDefault();
+            const email = $('#loginEmail').val().trim();
+            const password = $('#loginPassword').val();
+            const errorField = $('#loginError');
+            errorField.text('');
+
+            if (!userAccount) {
+                errorField.text('No account found. Please sign up first.');
+                return;
+            }
+
+            if (userAccount.email !== email || userAccount.password !== password) {
+                errorField.text('Email or password is incorrect.');
+                return;
+            }
+
+            userSession = { loggedIn: true, email: userAccount.email, name: userAccount.name };
+            saveSession();
+            updateAuthLinks();
+            showToast('Login successful!', 'success');
+            window.location.href = 'cart.html';
+        });
+    }
+
+    if ($('#signupForm').length) {
+        $('#signupForm').submit(function(event) {
+            event.preventDefault();
+            const name = $('#signupName').val().trim();
+            const email = $('#signupEmail').val().trim();
+            const password = $('#signupPassword').val();
+            const errorField = $('#signupError');
+            errorField.text('');
+
+            if (!name || !email || !password) {
+                errorField.text('Please complete every field.');
+                return;
+            }
+
+            userAccount = { name, email, password };
+            saveAccount();
+            userSession = { loggedIn: true, email, name };
+            saveSession();
+            updateAuthLinks();
+            showToast('Account created successfully!', 'success');
+            window.location.href = 'cart.html';
+        });
+    }
+
+    $('#cartContainer').on('change', '.cart-qty', function() {
+        const index = parseInt($(this).data('index'), 10);
+        const newQuantity = parseInt($(this).val(), 10) || 1;
+
+        if (newQuantity < 1) {
+            burgerCart.splice(index, 1);
+        } else {
+            burgerCart[index].quantity = newQuantity;
+        }
+
+        saveCart();
+        updateCartCount();
+        renderCart();
+    });
+
+    $('#cartContainer').on('click', '.remove-item', function() {
+        const index = parseInt($(this).data('index'), 10);
+        burgerCart.splice(index, 1);
+        saveCart();
+        updateCartCount();
+        renderCart();
+        showToast('Item removed from cart.', 'info');
+    });
+
+    $('body').on('click', '#checkoutButton', function() {
+        if (!userSession.loggedIn) {
+            showToast('Please log in before checking out.', 'danger');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        if (!burgerCart.length) {
+            showToast('Your cart is empty.', 'info');
+            return;
+        }
+
+        burgerCart = [];
+        saveCart();
+        updateCartCount();
+        renderCart();
+        showToast('Order placed successfully! Thank you.', 'success');
+        showCartMessage('Your order was placed successfully. We will contact you shortly.', 'success');
+    });
+
+    $('a[href^="#"]').on('click', function(event) {
+        const target = $(this).attr('href');
+        if (target === '#') {
+            return;
+        }
+
+        if ($(target).length) {
+            event.preventDefault();
+            $('html, body').animate({ scrollTop: $(target).offset().top - 70 }, 800);
+        }
+    });
+});

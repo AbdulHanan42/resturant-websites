@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BURGER HAVEN - Premium Fast Food</title>
+    <title>Specials - BURGER HAVEN</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -18,10 +18,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="specials.html">Specials</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="specials.html">Specials</a></li>
                     <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
@@ -37,78 +37,70 @@
         </div>
     </nav>
 
-    <main>
-        <section class="hero-section" id="home">
-            <div class="floating-burger"></div>
-            <div class="floating-burger"></div>
-            <div class="floating-burger"></div>
-            <div class="hero-content">
-                <h1 class="hero-title">PREMIUM FAST FOOD</h1>
-                <p class="hero-subtitle">Fresh ingredients, bold flavors, unforgettable experiences</p>
-                <div class="hero-buttons">
-                    <a class="btn btn-primary btn-lg me-3" href="menu.html">View Menu</a>
-                    <a class="btn btn-outline-light btn-lg" href="cart.html">My Cart</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="page-heading text-center py-5 bg-white">
+    <main class="single-page">
+        <section class="page-heading text-center">
             <div class="container">
-                <h2>Discover Burger Haven</h2>
-                <p>Explore each page for the menu, gallery, specials, reviews, and contact information.</p>
+                <h1>Today's Specials</h1>
+                <p>Check out our limited-time favorites made for bold flavor seekers.</p>
             </div>
         </section>
 
-        <section class="feature-section py-5">
+        <section class="specials-section py-5">
             <div class="container">
                 <div class="row gy-4">
                     <div class="col-lg-4">
-                        <div class="feature-card">
-                            <i class="fas fa-info-circle feature-icon"></i>
-                            <h3>About Us</h3>
-                            <p>Learn about our history, values, and quality promise.</p>
-                            <a class="btn btn-link" href="about.html">Read More</a>
+                        <div class="special-item">
+                            <div class="special-icon"><i class="fas fa-fire"></i></div>
+                            <h3 class="special-title">Spicy Burger Combo</h3>
+                            <p>Try our limited-time Spicy Ranch Burger with seasoned fries and a drink for only $12.99!</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="feature-card">
-                            <i class="fas fa-hamburger feature-icon"></i>
-                            <h3>Menu</h3>
-                            <p>Choose your favorites, set quantity, and add more than one item to your cart.</p>
-                            <a class="btn btn-link" href="menu.html">View Menu</a>
+                        <div class="special-item">
+                            <div class="special-icon"><i class="fas fa-leaf"></i></div>
+                            <h3 class="special-title">Meatless Monday</h3>
+                            <p>Every Monday get 20% off our vegetarian options. Try our Beyond Meat burger!</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="feature-card">
-                            <i class="fas fa-phone feature-icon"></i>
-                            <h3>Contact</h3>
-                            <p>Have a question? Reach out and we will reply quickly.</p>
-                            <a class="btn btn-link" href="contact.html">Contact Us</a>
+                        <div class="special-item">
+                            <div class="special-icon"><i class="fas fa-users"></i></div>
+                            <h3 class="special-title">Family Bundle</h3>
+                            <p>2 burgers, 2 fries, 2 drinks AND a free dessert for just $29.99. Perfect for sharing!</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="gallery-section py-5 bg-light" id="gallery">
+        <section class="more-section py-5 bg-light">
             <div class="container">
-                <h2 class="section-title text-center">Our Gallery</h2>
-                <div class="gallery-container">
-                    <div class="gallery-item">
-                        <img src="images/gallery-item-1.jpeg" alt="Juicy burger with melted cheese and fresh vegetables">
-                        <div class="gallery-caption">Classic Cheese Burger</div>
+                <h2 class="section-title text-center">More from Burger Haven</h2>
+                <div class="row gy-4">
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <img src="images/ourstory.jpeg" alt="Our Story" class="img-fluid rounded mb-3">
+                            <h3>About Us</h3>
+                            <p>Learn more about our mission and our fresh ingredients.</p>
+                            <a class="btn btn-link" href="about.html">Read More</a>
+                        </div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="images/gallery-item-2.jpeg" alt="Chicken sandwich with lettuce and special sauce">
-                        <div class="gallery-caption">Chicken Sandwich</div>
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <img src="images/menuItem-4.jpeg" alt="Bacon Double" class="img-fluid rounded mb-3">
+                            <h3>Menu</h3>
+                            <p>Browse all menu items and add the perfect dish to your cart.</p>
+                            <a class="btn btn-link" href="menu.html">View Menu</a>
+                        </div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="images/gallery-item-3.jpeg" alt="Delicious french fries with various dipping sauces">
-                        <div class="gallery-caption">French Fries Deluxe</div>
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <img src="images/gallery-item-3.jpeg" alt="Fries Deluxe" class="img-fluid rounded mb-3">
+                            <h3>Gallery</h3>
+                            <p>Check out our food gallery for inspiration before you order.</p>
+                            <a class="btn btn-link" href="gallery.html">View Gallery</a>
+                        </div>
                     </div>
-                </div>
-                <div class="text-center mt-4">
-                    <a class="btn btn-primary" href="gallery.html">See More Photos</a>
                 </div>
             </div>
         </section>
