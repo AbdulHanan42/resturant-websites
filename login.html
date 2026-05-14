@@ -29,8 +29,19 @@
                     <li class="nav-item auth-links">
                         <a class="nav-link active" href="login.html">Login</a>
                         <a class="nav-link signup-link" href="signup.html">Sign Up</a>
-                        <a class="nav-link logout-link d-none" href="#">Logout</a>
-                        <span class="nav-link nav-user d-none"></span>
+                    </li>
+                    <li class="nav-item dropdown user-dropdown d-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle me-1"></i> <span class="nav-user"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="userDropdown">
+                            <li><h6 class="dropdown-header">Profile Details</h6></li>
+                            <li><span class="dropdown-item-text"><i class="fas fa-user me-2 text-muted"></i> <span class="user-detail-name"></span></span></li>
+                            <li><span class="dropdown-item-text"><i class="fas fa-envelope me-2 text-muted"></i> <span class="user-detail-email"></span></span></li>
+                            <li><span class="dropdown-item-text"><i class="fas fa-phone me-2 text-muted"></i> <span class="user-detail-phone"></span></span></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item logout-link" href="#"><i class="fas fa-sign-out-alt me-2 text-danger"></i> Logout</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
